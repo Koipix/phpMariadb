@@ -1,2 +1,5 @@
 # phpMariadb
-saving files to test out php with mariadb, ready for sql injection for the sillies :3
+Test page for php with MariaDB
+
+### stuff used
+- mariaDB with Dbeaver GUI
