@@ -1,5 +1,4 @@
 <?php
-
 //load page even if it fails
 try {
     $conn = @mysqli_connect("localhost","root", "pix123", "pix");
@@ -8,4 +7,5 @@ try {
     $conn = null;
 }
 
+$status = $conn ? "Connected" :"Disconnected";
 ?>

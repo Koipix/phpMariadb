@@ -1,22 +1,30 @@
 <?php
 $request = $_SERVER['REQUEST_URI'];
 
+if ($request === '/status.php') {
+    require 'status.php';
+    exit();
+}
+
 switch ($request) {
     case '/login':
-        require 'login.php';
+        require './Pages/login_page.php';
         break;
     case '/register':
-        require 'register.php';
+        require './Pages/register_page.php';
         break;
     case '/home':
-        require 'homepage.php';
+        require './Pages/home_page.php';
         break;
     case '/admin':
-        require 'index.php';
+        require './Pages/admin_page.php';
+        break;
+    case '/test':
+        require '/status.php';
         break;
     default:
-        header("Location: login");
-        require 'login.php';
+        header("Location: register");
+        require './Pages/register_page.php';
         break;
 }
 ?>
