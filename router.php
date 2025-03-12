@@ -1,8 +1,9 @@
 <?php
 $request = $_SERVER['REQUEST_URI'];
 
-if ($request === '/status.php') {
-    require 'status.php';
+#catch for api calls
+if (strpos($request, "/api/") === 0) {
+    require __DIR__ . $request;
     exit();
 }
 

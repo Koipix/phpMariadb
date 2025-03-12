@@ -15,29 +15,30 @@
             <input type="text" id="pass" name="pass"><br><br>
             <label>Confirm Password</label> <br>
             <input type="text" id="confpass" name="confpass"><br><br>
-            <input type="submit" id="btn" value="Register" name="submit">
+            <input type="submit" id="btn" value="Register" name="submit"> <br>
+            <a href="">Already have an account?</a> <br><br>
+            <p id="msg"></p>
         </form> 
         <br><br>
-        <p id="msg"> </p>
     </div>
     <script>
         document.getElementById("registerForm").addEventListener("submit", function(event) {
             event.preventDefault();
 
             let formData = new FormData(this);
-            let msg = document.getElementById("msg");
+            let message = document.getElementById("msg");
 
-            fetch("register.php", {
+            fetch("/api/register.php", {
                 method: "POST",
                 body: formData
             })
             .then(response => response.text())
-            .then(data => { msg.textContent = data })
-            .catch(err => console.log("Error: ", error));
+            .then(data => { message.textContent = data })
+            .catch(err => console.log("Error: ", err));
         });
 
         function fetchStatus() {
-            fetch("../status.php")
+            fetch("/api/status.php")
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById("status").textContent = data;
