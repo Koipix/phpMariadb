@@ -6,17 +6,55 @@
 </head>
 <body>
     <div class="form">
-        <form method="post">
+        <form method="post" id="loginForm">
             <h1>Login Form</h1>
-            <p>Status: <?php echo $status ?></p> <br>
+            <p>Status: <span id="status"></span> </p> <br>
             <label">Username</label> <br>
             <input type="text" id="user" name="user"> <br><br>
             <label>Passsword</label> <br>
             <input type="text" id="pass" name="pass"><br><br>
-            <input type="submit" id="btn" value="Login" name="submit">
+            <button class="btn" onclick="fetchData()">Login</button>
+            <p>No account yet? <a href="/register"> Register here</a></p> <br><br>
+            <p id="msg"></p>
         </form> 
         <br>
     </div>
+    <script>
+        function fetchData() {
+            event.preventDefault();
+
+            let formData = new FormData(document.getElementById("loginForm"));
+            let message = document.getElementById("msg");
+
+            fetch("/api/login.php", {
+                method: "POST",
+                body: formData
+            })
+
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = data.redirect;
+                } else {
+                    message.textContent = data.message || "Something is wrong..";
+                }
+             })
+            .catch(err => console.log("Error: ", err));
+        }
+
+        function fetchStatus() {
+            fetch("/api/status.php")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("status").textContent = data;
+                })
+                .catch(err => console.log("Error: " + err));
+        }
+
+        window.onload = function() {
+             fetchStatus();
+        };
+    </script>
 </body>
 <style>
     /* lazy frontend */
@@ -31,9 +69,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-
-    .form form {
     }
 </style>
 </html>
