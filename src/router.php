@@ -8,6 +8,9 @@ switch ($request) {
     case '/register':
         require 'register.php';
         break;
+    case '/home':
+        require 'homepage.php';
+        break;
     case '/admin':
         require 'index.php';
         break;
