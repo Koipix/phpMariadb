@@ -1,4 +1,5 @@
     <?php
+        header("Content-Type: text/plain");
         session_start();
         require "connect_sql.php";
         $status = "";
@@ -22,22 +23,20 @@
     
                 if (mysqli_num_rows($check_query) > 0) {
                     echo "Username already exists!";
-                    exit();
                 } else {
                     $query = "INSERT INTO users (username, password) VALUES ('$username', '$password')";
     
                     if (mysqli_query($conn, $query)) {
                         echo "User added successfully!";
-                        exit();
                     } else {
                         echo "Error: " . mysqli_error($conn);
-                        exit();
                     }
                 }
             } else {
                 echo "Password must match!";
-                exit();
             }   
             exit();
+        } else {
+            echo "Invalid Request";
         }
     ?>
