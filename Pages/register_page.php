@@ -15,17 +15,17 @@
             <input type="text" id="pass" name="pass"><br><br>
             <label>Confirm Password</label> <br>
             <input type="text" id="confpass" name="confpass"><br><br>
-            <input type="submit" id="btn" value="Register" name="submit"> <br>
+            <button type="button" onclick="fetchData()">Register</button> <br>
             <a href="/login">Already have an account?</a> <br><br>
             <p id="msg"></p>
         </form> 
         <br><br>
     </div>
     <script>
-        document.getElementById("registerForm").addEventListener("submit", function(event) {
+        function fetchData() {
             event.preventDefault();
 
-            let formData = new FormData(this);
+            let formData = new FormData(document.getElementById("registerForm"));
             let message = document.getElementById("msg");
 
             fetch("/api/register.php", {
@@ -42,7 +42,7 @@
                 }
              })
             .catch(err => console.log("Error: ", err));
-        });
+        }
 
         function fetchStatus() {
             fetch("/api/status.php")
