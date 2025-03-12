@@ -22,21 +22,22 @@
                 $check_query = mysqli_query($conn, $check_query);
     
                 if (mysqli_num_rows($check_query) > 0) {
-                    echo "Username already exists!";
+                    echo json_encode(["success" => false, "message" => "Username already exists!"]);
                 } else {
                     $query = "INSERT INTO users (username, password) VALUES ('$username', '$password')";
     
                     if (mysqli_query($conn, $query)) {
-                        echo "User added successfully!";
+                        echo json_encode(["success" => true,"redirect" => "/login"]);
+                        exit();
                     } else {
-                        echo "Error: " . mysqli_error($conn);
+                        echo  json_encode(["success" => false, "message" => "Error: " . mysqli_error($conn)]);
                     }
-                }
+                } 
             } else {
-                echo "Password must match!";
-            }   
-            exit();
+                echo json_encode(["success" => false, "message" => "Password must match!"]);
+                exit();        
+            }         
         } else {
-            echo "Invalid Request";
+            echo json_encode(["success" => false, "message" => "Invalid Request!"]);
         }
     ?>

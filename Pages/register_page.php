@@ -16,7 +16,7 @@
             <label>Confirm Password</label> <br>
             <input type="text" id="confpass" name="confpass"><br><br>
             <input type="submit" id="btn" value="Register" name="submit"> <br>
-            <a href="">Already have an account?</a> <br><br>
+            <a href="/login">Already have an account?</a> <br><br>
             <p id="msg"></p>
         </form> 
         <br><br>
@@ -32,8 +32,15 @@
                 method: "POST",
                 body: formData
             })
-            .then(response => response.text())
-            .then(data => { message.textContent = data })
+
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = data.redirect;
+                } else {
+                    message.textContent = data.message || "Registration failed!";
+                }
+             })
             .catch(err => console.log("Error: ", err));
         });
 
