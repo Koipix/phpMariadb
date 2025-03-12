@@ -5,11 +5,15 @@ switch ($request) {
     case '/login':
         require 'login.php';
         break;
-    case '/signup':
-        require 'signup.php';
+    case '/register':
+        require 'register.php';
+        break;
+    case '/admin':
+        require 'index.php';
         break;
     default:
-        require 'index.php';
+        header("Location: login");
+        require 'login.php';
         break;
 }
 ?>

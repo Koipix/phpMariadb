@@ -15,34 +15,6 @@
         } else {
             $status = "Disconnected";
         }
-
-        if (isset($_POST["submit"]) && $conn) {
-            $username = $_POST["user"];
-            $password = $_POST["pass"];
-            
-            $check_query = "SELECT * FROM users WHERE username = '$username'";
-            $check_query = mysqli_query($conn, $check_query);
-
-            if (mysqli_num_rows($check_query) > 0) {
-                $_SESSION['message'] = "Username already exists!";
-            } else {
-                $query = "INSERT INTO users (username, password) VALUES ('$username', '$password')";
-
-                if (mysqli_query($conn, $query)) {
-                    $_SESSION['message'] = "User added successfully!";
-                } else {
-                    $_SESSION['message'] = "Error: " . mysqli_error($conn);
-                }
-            }
-
-            header("Location: " . $_SERVER['PHP_SELF']);
-            exit();
-        }
-
-        if (isset($_SESSION['message'])) {
-            $message = $_SESSION['message'];
-            unset($_SESSION['message']);
-        }
     ?>
 <body>
     <div class="form">
@@ -56,15 +28,8 @@
             <input type="submit" id="btn" value="Register" name="submit">
         </form> 
         <br>
-
-        <!-- whatever is this abomination..-->
-        <?php if (!empty($message)): ?>
-            <p><?php echo $message; ?></p>
-        <?php endif; ?>
-
     </div>
 </body>
-
 <style>
     /* lazy frontend */
     * {
