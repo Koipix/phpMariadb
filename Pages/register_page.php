@@ -2,21 +2,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Register</title>
 </head>
 <body>
     <div class="form">
         <form method="post" id="registerForm">
-            <h1>Register Form</h1>
+            <h1>Register</h1>
             <p>Status: <span id="status"></span></p> <br>
-            <label">Username</label> <br>
-            <input type="text" id="user" name="user"> <br><br>
-            <label>Passsword</label> <br>
-            <input type="password" id="pass" name="pass"><br><br>
-            <label>Confirm Password</label> <br>
-            <input type="password" id="confpass" name="confpass"><br><br>
-            <button type="button" onclick="fetchData()">Register</button> <br>
-            <a href="/login">Already have an account?</a> <br><br>
+            <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input class="form-control" type="text" id="user" name="user">
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3 mt-4">
+                <label class="form-label">Passsword</label>
+                <input class="form-control" type="password" id="pass" name="pass">
+            </div>
+            <div class="mb-3 mt-4">
+                <label class="form-label">Confirm Password</label>
+                <input class="form-control" type="password" id="confpass" name="confpass">
+            </div>
+            <div class="d-grid">
+                <button class="btn btn-primary my-4" onclick="fetchData()">Register</button>
+            </div>
+            <p>Already have an account? <a href="/login">Login here</a></p> <br><br>
             <p id="msg"></p>
         </form> 
         <br><br>
