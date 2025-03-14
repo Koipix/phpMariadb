@@ -12,7 +12,7 @@
             <label">Username</label> <br>
             <input type="text" id="user" name="user"> <br><br>
             <label>Passsword</label> <br>
-            <input type="text" id="pass" name="pass"><br><br>
+            <input type="password" id="pass" name="pass"><br><br>
             <button class="btn" onclick="fetchData()">Login</button>
             <p>No account yet? <a href="/register"> Register here</a></p> <br><br>
             <p id="msg"></p>

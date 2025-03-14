@@ -12,9 +12,9 @@
             <label">Username</label> <br>
             <input type="text" id="user" name="user"> <br><br>
             <label>Passsword</label> <br>
-            <input type="text" id="pass" name="pass"><br><br>
+            <input type="password" id="pass" name="pass"><br><br>
             <label>Confirm Password</label> <br>
-            <input type="text" id="confpass" name="confpass"><br><br>
+            <input type="password" id="confpass" name="confpass"><br><br>
             <button type="button" onclick="fetchData()">Register</button> <br>
             <a href="/login">Already have an account?</a> <br><br>
             <p id="msg"></p>
