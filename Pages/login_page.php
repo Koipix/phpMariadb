@@ -151,7 +151,7 @@
             border: 2px solid #C63C51;
             border-radius: 50px;
             box-shadow: 0px 10px 10px #C63C5180;
-            margin: 0px 50px;
+            margin: auto 50px;
             padding: 50px;
         }
         #loginForm > * {
