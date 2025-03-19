@@ -4,7 +4,13 @@
 
     $id = $_GET['id'];
     $query = "SELECT * FROM post_data WHERE id='$id'";
-    $result = $conn->query($query);
+    $resultId = $conn->query($query);
+
+    $comment_query = "SELECT content, created_at FROM comments WHERE post_id = ?";
+    $stmt = $conn->prepare($comment_query);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 ?>
 
 <html lang="en">
@@ -21,11 +27,7 @@
     <nav class="navbar navbar-expand-lg p-4 bg-darkblue">
         <div class="container d-flex justify-content-between align-items-center">
             <p class="fs-5 fw-bold text-id mb-0">Welcome, <?php echo htmlspecialchars($_SESSION['user']); ?>!</p>
-            <div class="d-flex align-items-center gap-3">
-                <button class="btn btn-red-custom btn-hover text-light fs-5 rounded-5 d-flex align-items-center px-3 py-2 h-100" data-bs-toggle="modal" data-bs-target="#addPostModal">
-                    <i class="bi bi-plus-lg fw-medium"></i>
-                    <span class="fs-6 ms-2 fw-medium">New</span>
-                </button>        
+            <div class="d-flex align-items-center gap-3">     
                 <a href="/api/logout.php" class="btn rounded-5 d-flex align-items-center px-3 py-2 h-100 text-light fw-medium">
                     Logout
                 </a>       
@@ -34,12 +36,12 @@
     </nav>
 
     <div class="d-flex justify-content-center custom-container gap-2">
-        <div class="main w-75 d-flex flex-wrap justify-content-md-between">
-            <div class="d-flex container justify-content-center">
-                <?php if ($result->num_rows == 1): ?>
-                    <ul class="d-flex flex-column gap-3 w-100">
-                        <?php while ($row = $result->fetch_assoc()): ?>
-                            <li class="card bg-container border-container py-3 px-4 rounded-4 min-container">
+        <div class="main w-75 d-flex justify-content-md-between">
+            <div class="d-flex flex-column container justify-content-center gap-3">
+                <?php if ($resultId->num_rows == 1): ?>
+                    <ul class="d-flex flex-column gap-3 align-items-center w-100 p-0">
+                        <?php while ($row = $resultId->fetch_assoc()): ?>
+                            <li class="card bg-container border-container py-3 px-4 rounded-4 min-container w-100">
                                 <div class="d-flex justify-content-between mb-2">
                                     <p class="text-id fw-semibold fs-xsm">#<?= $row['id'] ?></p>
                                     <small class="text-container">Posted on <?= $row['created_at'] ?></small>
@@ -55,18 +57,36 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="d-none d-md-block bg-light">
-                                        
-                                    </div>
                                 </div>
                             </li>
                         <?php endwhile; ?>
                     </ul>
-                <?php else: ?>
-                    <div class="">
-                        <p class="text-id">No posts found</p>
-                    </div>
                 <?php endif; ?>
+
+                <div class="d-flex flex-column w-100">
+                    <div class="card bg-container border-container py-3 px-4 rounded-4 min-container">
+                            <div class="d-inline-flex justify-content-between align-items-center mb-3">
+                                <h3 class="text-id fs-4">Comment Section</h3>
+                                <button class="btn btn-red-custom btn-hover text-light fs-5 rounded-5 d-flex align-items-center px-3 py-2 h-100" data-bs-toggle="modal" data-bs-target="#addCommentModal">
+                                    <i class="bi bi-plus-lg fw-medium"></i>
+                                    <span class="fs-6 ms-2 fw-medium">New</span>
+                                </button> 
+                            </div>
+                            
+                            <?php if ($result->num_rows > 0): ?>
+                                <ul class="d-flex flex-column gap-3 w-100 p-0">
+                                    <?php while ($comment = $result->fetch_assoc()): ?>
+                                        <li class="list-unstyled mt-2">
+                                            <p class="fs-6 text-id mb-0"><?= htmlspecialchars($comment['content']) ?></p>
+                                            <span class="fs-6 text-id"><?= $comment['created_at'] ?></span>
+                                        </li>
+                                    <?php endwhile; ?>
+                                </ul>
+                            <?php else: ?>
+                                <p class="fs-6 text-id">No comments yet.</p>
+                            <?php endif; ?>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -75,25 +95,21 @@
         </div>
     </div>    
 
-    <div class="modal fade" id="addPostModal" tabindex="-1" aria-labelledby="addPostLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal fade" id="addCommentModal" tabindex="-1" aria-labelledby="addCommenttLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-light">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addPostLabel">New Post</h5>
+                    <h5 class="modal-title" id="addCommentLabel">New Comment</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/api/create_post.php" method="POST">
+                    <form action="/api/create_comment.php" method="POST">
+                        <input type="hidden" name="post_id" value="<?= $id?>">
                         <div class="mb-3">
-                            <label for="title" class="form-label">Title</label>
-                            <input type="text" name="title" id="title" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="content" class="form-label">Content</label>
                             <textarea name="content" id="content" class="form-control" rows="4" required></textarea>
                         </div>
-                        <div class="d-flex justify-content-end"> 
-                            <button type="submit" class="btn btn-success">Post</button>
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-success">Add Comment</button>
                         </div>
                     </form>
                 </div>
@@ -165,7 +181,7 @@
 
     .min-box {
         min-width: 350px;
-        min-height: 100px;
+        min-height: 350px;
         max-width: 400px;
         max-height: 400px;
     }  
