@@ -2,6 +2,18 @@
 
 ![sample](https://i.imgur.com/SLLoTQm.png)
 
+## Startup
+
+**Start your local server through `router.php` for it to work**
+
+While on terminal: 
+```bash
+cd phpMariadb/
+php -S localhost:3000 router.php
+```
+
+Note: You might need the [php runtime](https://windows.php.net/download/) to start the server for **Windows**
+
 ## User Data
 
 **DB Name**: userdb <br>
