@@ -84,6 +84,9 @@
             local("Montserrat Bold"),
             url(https://fonts.gstatic.com/s/montserrat/v29/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCuM73w5aXo.woff2) format(woff2);
     }
+    :root {
+        --theme-color: #c63c51;
+    }
     body {
         background-color: #a02f40;
         font-family: "Montserrat";
@@ -112,7 +115,7 @@
         width: 100%;
     }
     #registerForm > h1 {
-        color: #c63c51;
+        color: var(--theme-color);
         font-weight: 700;
         text-align: center;
         text-transform: uppercase;
@@ -134,20 +137,20 @@
         margin-top: 1rem !important;
     }
     .btn {
-        border-color: #C63C51 !important;
-        background-color: #C63C51;
+        border-color: var(--theme-color) !important;
+        background-color: var(--theme-color);
         margin-top: 0.5rem !important;
         transition: all 0.25s ease;
     }
     .btn:hover, .btn:focus {
-        color: #C63C51 !important;
-        background-color: #C63C5100 !important;
+        color: var(--theme-color) !important;
+        background-color: var(--theme-color)00 !important;
     }
     #registerForm p:nth-of-type(2) a {
-        color: #C63C51;
+        color: var(--theme-color);
     }
     #msg {
-        color: #C63C51;
+        color: var(--theme-color);
         font-weight: 700;
         margin-bottom: 0px;
         text-align: center;
@@ -168,9 +171,9 @@
             background-color: #f2f2f2;
         }
         #registerForm {
-            border: 2px solid #C63C51;
+            border: 2px solid var(--theme-color);
             border-radius: 50px;
-            box-shadow: 0px 10px 10px #C63C5180;
+            box-shadow: 0px 10px 10px var(--theme-color)80;
             margin: auto 50px;
             padding: 50px;
         }
