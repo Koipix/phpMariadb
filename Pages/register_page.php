@@ -89,21 +89,26 @@
         font-family: "Montserrat";
         height: 100vh;
         min-width: 240px;
+        transition: background-color 0.25s ease;
     }
     .form {
         align-items: center;
         display: flex;
         height: 100%;
         justify-content: center;
+        transition: all 0.25s ease;
     }
     #registerForm {
         align-items: center;
         background-color: #ffffff;
         display: flex;
-        margin: auto;
         flex-direction: column;
+        margin: auto;
         max-width: 1000px;
         padding: 25px;
+        width: 100%;
+    }
+    #registerForm > * {
         width: 100%;
     }
     #registerForm > h1 {
