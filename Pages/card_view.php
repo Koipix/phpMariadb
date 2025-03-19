@@ -2,9 +2,11 @@
     require "session_handler.php"; 
     require "connect_sql.php";
 
-    $sql = "SELECT * FROM post_data ORDER BY id DESC";
-    $result = $conn->query($sql);
+    $id = $_GET['id'];
+    $query = "SELECT * FROM post_data WHERE id='$id'";
+    $result = $conn->query($query);
 ?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -31,11 +33,10 @@
         </div>
     </nav>
 
-
     <div class="d-flex justify-content-center custom-container gap-2">
         <div class="main w-75 d-flex flex-wrap justify-content-md-between">
             <div class="d-flex container justify-content-center">
-                <?php if ($result->num_rows > 0): ?>
+                <?php if ($result->num_rows == 1): ?>
                     <ul class="d-flex flex-column gap-3 w-100">
                         <?php while ($row = $result->fetch_assoc()): ?>
                             <li class="card bg-container border-container py-3 px-4 rounded-4 min-container">
@@ -51,12 +52,6 @@
                                             <a href="" class="d-inline-flex align-items-center text-decoration-none">
                                                 <i class="bi bi-arrow-up font-subtle"></i>
                                                 <p class="mb-0 ms-1 font-subtle"><?= $row['react_count'] ?></p>
-                                            </a>
-                                        </div>
-                                        <div class="me-4 fs-5 d-inline-flex align-items-center">
-                                            <a href="home/card/<?= $row['id']; ?>" class="d-inline-flex align-items-center text-decoration-none">
-                                                <i class="bi bi-chat-dots me-1 font-subtle"></i>
-                                                <p class="mb-0 ms-1 font-subtle"><?= $row['comment_count'] ?></p>
                                             </a>
                                         </div>
                                     </div>
@@ -78,9 +73,7 @@
         <div class="bg-container border-container h-25 w-50 p-3 min-box rounded-3">
                 <h3 class="text-id">Post anonymously!</h3>
         </div>
-    </div>
-
-
+    </div>    
 
     <div class="modal fade" id="addPostModal" tabindex="-1" aria-labelledby="addPostLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -188,6 +181,4 @@
     .btn-hover:hover {
         background-color: #D95F59;
     }
-    
 </style>
-</html>
