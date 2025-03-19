@@ -64,18 +64,100 @@
     </script>
 </body>
 <style>
-    /* lazy frontend */
-    * {
-        margin: 0;
-        padding: 0;
+    @font-face {
+        font-family: Montserrat;
+        font-weight: 400;
+        src:
+            local(Montserrat),
+            url(https://fonts.gstatic.com/s/montserrat/v29/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw5aXo.woff2) format(woff2);
     }
-
-    .form {
+    @font-face {
+        font-family: Montserrat;
+        font-weight: 700;
+        src:
+            local(Montserrat-Bold),
+            local("Montserrat Bold"),
+            url(https://fonts.gstatic.com/s/montserrat/v29/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCuM73w5aXo.woff2) format(woff2);
+    }
+    body {
+        background-color: #a02f40;
+        font-family: "Montserrat";
         height: 100vh;
-        width: 100%;
-        display: flex;
-        justify-content: center;
+        min-width: 240px;
+        transition: background-color 0.25s ease;
+    }
+    .form {
         align-items: center;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        transition: all 0.25s ease;
+    }
+    #loginForm {
+        align-items: center;
+        background-color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        max-width: 1000px;
+        padding: 25px;
+        width: 100%;
+    }
+    #loginForm > * {
+        width: 100%;
+    }
+    #loginForm > h1 {
+        color: #c63c51;
+        font-weight: 700;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    #loginForm > p {
+        text-align: center;
+    }
+    .mt-4 {
+        margin-top: 1rem !important;
+    }
+    .btn {
+        border-color: #C63C51 !important;
+        background-color: #C63C51;
+        margin-top: 0.5rem !important;
+        transition: all 0.25s ease;
+    }
+    .btn:hover, .btn:focus {
+        color: #C63C51 !important;
+        background-color: #C63C5100 !important;
+    }
+    #loginForm p:last-of-type a {
+        color: #C63C51;
+    }
+    #msg {
+        color: #C63C51;
+        font-weight: 700;
+        margin-bottom: 0px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    @media only screen and (min-width: 390px) {
+        #loginForm {
+            padding: 50px 25px;
+        }
+    }
+    @media only screen and (min-width: 540px) {
+        body {
+            background-color: #f2f2f2;
+        }
+        #loginForm {
+            border: 2px solid #C63C51;
+            border-radius: 50px;
+            box-shadow: 0px 10px 10px #C63C5180;
+            margin: 0px 50px;
+            padding: 50px;
+        }
+        #loginForm > * {
+            min-width: 436px;
+            width: calc((100% - 102px) * 0.75);
+        }
     }
 </style>
 </html>
