@@ -2,8 +2,8 @@
 $request = trim($_SERVER['REQUEST_URI'], '/');
 
 #catch for api calls
-if (strpos($request, "/api/") === 0) {
-    require __DIR__ . $request;
+if (strpos($request, "api/") === 0) {
+    require __DIR__ . "/$request";
     exit();
 }
 
@@ -28,7 +28,7 @@ switch ($request) {
         require './Pages/admin_page.php';
         break;
     case 'test':
-        require '/status.php';
+        require 'api/status.php';
         break;
     default:
         header("Location: /register");
