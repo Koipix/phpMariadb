@@ -7,6 +7,13 @@ if (strpos($request, "api/") === 0) {
     exit();
 }
 
+#upvote action
+if (preg_match("#^upvote/(\d+)$#", $request, $matches)) {
+    $_GET['id'] = $matches[1];
+    require 'api/upvote.php';
+    exit();
+}
+
 #card view page
 if (preg_match("#^home/card/(\d+)$#", $request, $matches)) {
     $_GET['id'] = $matches[1];

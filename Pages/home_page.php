@@ -48,14 +48,14 @@
                                 <div class="flex border-custom-top pt-3">
                                     <div class="d-inline-flex font-subtle align-items-center">
                                         <div class="me-4 fs-5 d-inline-flex align-items-center">
-                                            <a href="" class="d-inline-flex align-items-center text-decoration-none">
-                                                <i class="bi bi-arrow-up font-subtle"></i>
+                                            <a href="upvote/<?= $row['id'] ?>" class="d-inline-flex align-items-center text-decoration-none">
+                                                <i class="bi bi-arrow-up font-subtle upvote"></i>
                                                 <p class="mb-0 ms-1 font-subtle"><?= $row['react_count'] ?></p>
                                             </a>
                                         </div>
                                         <div class="me-4 fs-5 d-inline-flex align-items-center">
                                             <a href="home/card/<?= $row['id']; ?>" class="d-inline-flex align-items-center text-decoration-none">
-                                                <i class="bi bi-chat-dots me-1 font-subtle"></i>
+                                                <i class="bi bi-chat-dots me-1 font-subtle comment"></i>
                                                 <p class="mb-0 ms-1 font-subtle"><?= $row['comment_count'] ?></p>
                                             </a>
                                         </div>
@@ -187,6 +187,10 @@
 
     .btn-hover:hover {
         background-color: #D95F59;
+    }
+
+    .upvote:hover, .comment:hover{
+        color: #C63C51;
     }
     
 </style>
