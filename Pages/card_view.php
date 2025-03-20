@@ -5,8 +5,10 @@
     $id = $_GET['id'];
     $query = "SELECT * FROM post_data WHERE id='$id'";
     $resultId = $conn->query($query);
+    $row = $resultId->fetch_assoc();
+    $post_id = $row['id'];
 
-    $comment_query = "SELECT content, created_at FROM comments WHERE post_id = ?";
+    $comment_query = "SELECT * FROM comments WHERE post_id = ?";
     $stmt = $conn->prepare($comment_query);
     $stmt->bind_param("i", $id);
     $stmt->execute();
@@ -38,9 +40,7 @@
     <div class="d-flex justify-content-center custom-container gap-2">
         <div class="main w-75 d-flex justify-content-md-between">
             <div class="d-flex flex-column container justify-content-center gap-3">
-                <?php if ($resultId->num_rows == 1): ?>
                     <ul class="d-flex flex-column gap-3 align-items-center w-100 p-0">
-                        <?php while ($row = $resultId->fetch_assoc()): ?>
                             <li class="card bg-container border-container py-3 px-4 rounded-4 min-container w-100">
                                 <div class="d-flex justify-content-between mb-2">
                                     <p class="text-id fw-semibold fs-xsm">#<?= $row['id'] ?></p>
@@ -52,16 +52,14 @@
                                     <div class="d-inline-flex font-subtle align-items-center">
                                         <div class="me-4 fs-5 d-inline-flex align-items-center">
                                             <a href="" class="d-inline-flex align-items-center text-decoration-none">
-                                                <i class="bi bi-arrow-up font-subtle"></i>
+                                                <i class="bi bi-arrow-up font-subtle upvote"></i>
                                                 <p class="mb-0 ms-1 font-subtle"><?= $row['react_count'] ?></p>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </li>
-                        <?php endwhile; ?>
                     </ul>
-                <?php endif; ?>
 
                 <div class="d-flex flex-column w-100">
                     <div class="card bg-container border-container py-3 px-4 rounded-4 min-container">
@@ -76,9 +74,16 @@
                             <?php if ($result->num_rows > 0): ?>
                                 <ul class="d-flex flex-column gap-3 w-100 p-0">
                                     <?php while ($comment = $result->fetch_assoc()): ?>
-                                        <li class="list-unstyled mt-2">
-                                            <p class="fs-6 text-id mb-0"><?= htmlspecialchars($comment['content']) ?></p>
-                                            <span class="fs-6 text-id"><?= $comment['created_at'] ?></span>
+                                        <li class="list-unstyled mt-2 d-inline-flex justify-content-between align-items-center">
+                                            <div>
+                                                <p class="fs-6 text-id mb-0"><?= htmlspecialchars($comment['content']) ?></p>
+                                                <span class="fs-6 text-id"><?= $comment['created_at'] ?></span>                    
+                                            </div>
+                                            <div class="visible">
+                                                <a href="/deleteComment/<?= $comment['id']; ?>/<?= $post_id ?>" class="fs-5 d-inline-flex align-items-center text-decoration-none">
+                                                    <i class="bi bi-trash font-subtle fs-4 delete"></i>
+                                                </a>
+                                            </div>
                                         </li>
                                     <?php endwhile; ?>
                                 </ul>
@@ -196,5 +201,9 @@
 
     .btn-hover:hover {
         background-color: #D95F59;
+    }
+
+    .upvote:hover, .comment:hover, .delete:hover{
+        color: #C63C51;
     }
 </style>

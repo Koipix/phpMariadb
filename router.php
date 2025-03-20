@@ -7,10 +7,18 @@ if (strpos($request, "api/") === 0) {
     exit();
 }
 
-#delete action
+#delete post action
 if (preg_match("#^delete/(\d+)$#", $request, $matches)) {
     $_GET['id'] = $matches[1];
     require 'api/delete_post.php';
+    exit();
+}
+
+#delete comment action
+if (preg_match("#^deleteComment/(\d+)/(\d+)$#", $request, $matches)) {
+    $_GET['comment_id'] = $matches[1];
+    $_GET['post_id'] = $matches[2];
+    require 'api/delete_comment.php';
     exit();
 }
 
