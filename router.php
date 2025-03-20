@@ -7,6 +7,13 @@ if (strpos($request, "api/") === 0) {
     exit();
 }
 
+#delete action
+if (preg_match("#^delete/(\d+)$#", $request, $matches)) {
+    $_GET['id'] = $matches[1];
+    require 'api/delete_post.php';
+    exit();
+}
+
 #upvote action
 if (preg_match("#^upvote/(\d+)$#", $request, $matches)) {
     $_GET['id'] = $matches[1];

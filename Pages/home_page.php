@@ -45,7 +45,7 @@
                                 </div>
                                 <h5 class="text-container fw-normal"><?= htmlspecialchars($row['title']) ?></h5>
                                 <p class="text-container fw-light"><?= nl2br(htmlspecialchars($row['content'])) ?></p>
-                                <div class="flex border-custom-top pt-3">
+                                <div class="d-flex border-custom-top pt-3 justify-content-between align-items-center">
                                     <div class="d-inline-flex font-subtle align-items-center">
                                         <div class="me-4 fs-5 d-inline-flex align-items-center">
                                             <a href="upvote/<?= $row['id'] ?>" class="d-inline-flex align-items-center text-decoration-none">
@@ -60,8 +60,11 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="d-none d-md-block bg-light">
-                                        
+                                    <div class="visible">
+                                        <a href="delete/<?= $row['id'] ?>" class="fs-5 d-inline-flex align-items-center text-decoration-none">
+                                            <i class="bi bi-trash font-subtle fs-4 delete"></i>
+                                            <p class="mb-0 ms-1 font-subtle">Delete</p>
+                                        </a>
                                     </div>
                                 </div>
                             </li>
@@ -189,7 +192,7 @@
         background-color: #D95F59;
     }
 
-    .upvote:hover, .comment:hover{
+    .upvote:hover, .comment:hover, .delete:hover{
         color: #C63C51;
     }
     
