@@ -5,4 +5,10 @@
         header("Location: /login");
         exit();
     }
+
+    if ($_SESSION['user']['admin'] == 1) {
+        $isAdmin = true;
+    } else {
+        $isAdmin = false;
+    }
 ?>

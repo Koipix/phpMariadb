@@ -28,7 +28,7 @@
 
     <nav class="navbar navbar-expand-lg p-4 bg-darkblue">
         <div class="container d-flex justify-content-between align-items-center">
-            <p class="fs-5 fw-bold text-id mb-0">Welcome, <?php echo htmlspecialchars($_SESSION['user']); ?>!</p>
+            <p class="fs-5 fw-bold text-id mb-0">Welcome, <?php echo htmlspecialchars($_SESSION['user']['username']); ?>!</p>
             <div class="d-flex align-items-center gap-3">     
                 <a href="/api/logout.php" class="btn rounded-5 d-flex align-items-center px-3 py-2 h-100 text-light fw-medium">
                     Logout
@@ -79,7 +79,7 @@
                                                 <p class="fs-6 text-id mb-0"><?= htmlspecialchars($comment['content']) ?></p>
                                                 <span class="fs-6 text-id"><?= $comment['created_at'] ?></span>                    
                                             </div>
-                                            <div class="visible">
+                                            <div class="<?= $isAdmin ? "visible" : "invisible"; ?>">
                                                 <a href="/deleteComment/<?= $comment['id']; ?>/<?= $post_id ?>" class="fs-5 d-inline-flex align-items-center text-decoration-none">
                                                     <i class="bi bi-trash font-subtle fs-4 delete"></i>
                                                 </a>

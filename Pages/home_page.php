@@ -18,7 +18,7 @@
 
     <nav class="navbar navbar-expand-lg p-4 bg-darkblue">
         <div class="container d-flex justify-content-between align-items-center">
-            <p class="fs-5 fw-bold text-id mb-0">Welcome, <?php echo htmlspecialchars($_SESSION['user']); ?>!</p>
+            <p class="fs-5 fw-bold text-id mb-0">Welcome, <?php echo htmlspecialchars($_SESSION['user']['username']); ?>!</p>
             <div class="d-flex align-items-center gap-3">
                 <button class="btn btn-red-custom btn-hover text-light fs-5 rounded-5 d-flex align-items-center px-3 py-2 h-100" data-bs-toggle="modal" data-bs-target="#addPostModal">
                     <i class="bi bi-plus-lg fw-medium"></i>
@@ -60,7 +60,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="visible">
+                                    <div class="<?= $isAdmin ? "visible" : "invisible"; ?>">
                                         <a href="delete/<?= $row['id'] ?>" class="fs-5 d-inline-flex align-items-center text-decoration-none">
                                             <i class="bi bi-trash font-subtle fs-4 delete"></i>
                                             <p class="mb-0 ms-1 font-subtle">Delete</p>

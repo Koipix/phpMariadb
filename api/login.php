@@ -11,9 +11,10 @@
                       password='$password'";
 
             $check_query = mysqli_query($conn, $query);
-
+            
             if (mysqli_num_rows($check_query) === 1) {
-                $_SESSION['user'] = $username;
+                $user = mysqli_fetch_assoc($check_query);
+                $_SESSION['user'] = $user;
                 echo json_encode(["success" => true, "redirect" => "/home"]);
                 exit();
             } else {
