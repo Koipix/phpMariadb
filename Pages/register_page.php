@@ -68,20 +68,119 @@
         };
     </script>
 </body>
-
 <style>
-    /* lazy frontend */
-    * {
-        margin: 0;
-        padding: 0;
+    @font-face {
+        font-family: Montserrat;
+        font-weight: 400;
+        src:
+            local(Montserrat),
+            url(https://fonts.gstatic.com/s/montserrat/v29/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw5aXo.woff2) format(woff2);
     }
-
-    .form {
+    @font-face {
+        font-family: Montserrat;
+        font-weight: 700;
+        src:
+            local(Montserrat-Bold),
+            local("Montserrat Bold"),
+            url(https://fonts.gstatic.com/s/montserrat/v29/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCuM73w5aXo.woff2) format(woff2);
+    }
+    :root {
+        --theme-color: #c63c51;
+    }
+    body {
+        background-color: #a02f40;
+        font-family: "Montserrat";
         height: 100vh;
-        width: 100%;
-        display: flex;
-        justify-content: center;
+        min-width: 240px;
+        transition: background-color 0.25s ease;
+    }
+    .form {
         align-items: center;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        transition: all 0.25s ease;
+    }
+    #registerForm {
+        align-items: center;
+        background-color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        max-width: 1000px;
+        padding: 25px;
+        width: 100%;
+    }
+    #registerForm > * {
+        width: 100%;
+    }
+    #registerForm > h1 {
+        color: var(--theme-color);
+        font-weight: 700;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    #registerForm > p {
+        text-align: center;
+    }
+    #emailHelp {
+        height: 0px;
+        margin-top: 0px;
+        overflow: hidden;
+        transition: all 0.25s ease;
+    }
+    #user:focus + #emailHelp {
+        height: 42px;
+        margin-top: 0.25rem;
+    }
+    .mt-4 {
+        margin-top: 1rem !important;
+    }
+    .btn {
+        border-color: var(--theme-color) !important;
+        background-color: var(--theme-color);
+        margin-top: 0.5rem !important;
+        transition: all 0.25s ease;
+    }
+    .btn:hover, .btn:focus {
+        color: var(--theme-color) !important;
+        background-color: var(--theme-color)00 !important;
+    }
+    #registerForm p:nth-of-type(2) a {
+        color: var(--theme-color);
+    }
+    #msg {
+        color: var(--theme-color);
+        font-weight: 700;
+        margin-bottom: 0px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    @media only screen and (min-width: 352px) {
+        #user:focus + #emailHelp {
+            height: 21px;
+        }
+    }
+    @media only screen and (min-width: 390px) {
+        #registerForm {
+            padding: 50px 25px;
+        }
+    }
+    @media only screen and (min-width: 540px) {
+        body {
+            background-color: #f2f2f2;
+        }
+        #registerForm {
+            border: 2px solid var(--theme-color);
+            border-radius: 50px;
+            box-shadow: 0px 10px 10px var(--theme-color)80;
+            margin: auto 50px;
+            padding: 50px;
+        }
+        #registerForm > * {
+            min-width: 436px;
+            width: calc((100% - 102px) * 0.75);
+        }
     }
 </style>
 </html>
